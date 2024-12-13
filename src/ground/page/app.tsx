@@ -1,10 +1,11 @@
 // 自作コンポーネント
-import PaletteList from './palette-list';
+// import PaletteList from './palette-list';
+import PaletteEdit from './palette-edit';
 
 // アプリケーションのルートコンポーネント
 function App() {
   return (
-    <PaletteList/>
+    <PaletteEdit/>
   );
 }
 
