@@ -1,5 +1,11 @@
+// 自作コンポーネント
+import PaletteList from './palette-list';
+
+// アプリケーションのルートコンポーネント
 function App() {
-  return (<h1>Hello World</h1>);
+  return (
+    <PaletteList/>
+  );
 }
 
 export default App;
