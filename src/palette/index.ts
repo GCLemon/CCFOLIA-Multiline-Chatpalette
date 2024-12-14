@@ -27,7 +27,7 @@ export function generateKey() {
 }
 
 // valueがPaletteであることを保証する関数
-function isPalette(value:unknown): value is Palette {
+export function isPalette(value:unknown): value is Palette {
   return value !== null
     && typeof value === 'object'
     && 'id' in value && typeof value.id === 'string'

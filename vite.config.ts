@@ -35,6 +35,7 @@ export default defineConfig({
     alias: {
       '@ground/': `${__dirname}/src/ground/`,
       '@content/': `${__dirname}/src/content/`,
+      '@palette/': `${__dirname}/src/palette/`,
     }
   }
 });
