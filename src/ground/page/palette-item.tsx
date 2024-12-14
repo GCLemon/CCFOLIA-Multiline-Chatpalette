@@ -8,6 +8,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SendIcon from '@mui/icons-material/Send';
 
+// React Router 関連
+import { useNavigate } from 'react-router-dom';
+
 // コンポーネントに渡すパラメータ
 type Props = {
   key?: string,
@@ -18,12 +21,16 @@ type Props = {
 // チャットパレットのアイテム表示部分
 function PaletteItem(props:Props) {
 
+  // ナビゲーション
+  const navigate = useNavigate();
+
   // 送信ボタンが押された時のイベント
   const send = () => {
   };
 
   // 編集ボタンが押された時のイベント
   const edit = () => {
+    navigate('/edit');
   };
 
   // 削除ボタンが押された時のイベント

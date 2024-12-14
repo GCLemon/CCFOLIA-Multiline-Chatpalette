@@ -9,8 +9,16 @@ import Typography from '@mui/material/Typography';
 // アイコン関連
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
+// React Router 関連
+import { useNavigate } from 'react-router-dom';
+
 // チャットパレットを編集するページ
 function PaletteEdit() {
+
+  // ナビゲーション
+  const navigate = useNavigate();
+
+  // レンダリングを行う
   return (
     <Box>
       <Box sx={{marginBottom:'12pt'}}>
@@ -29,7 +37,7 @@ function PaletteEdit() {
         </Grid>
         <Grid size={12}>
           <Box flexDirection='row' justifyContent='flex-end' display='flex'>
-            <Button variant='contained' startIcon={<NavigateBeforeIcon/>}>
+            <Button variant='contained' startIcon={<NavigateBeforeIcon/>} onClick={() => navigate('/')}>
               保存して戻る
             </Button>
           </Box>

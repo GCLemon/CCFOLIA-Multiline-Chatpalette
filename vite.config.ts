@@ -17,7 +17,7 @@ const manifest = defineManifest({
       run_at: 'document_start',
       js: ['./src/content/index.ts'],
     },
-  ]
+  ],
 });
 
 // ViteConfigを定義
@@ -29,5 +29,5 @@ export default defineConfig({
         index: './src/ground/index.html'
       }
     }
-  }
+  },
 });
