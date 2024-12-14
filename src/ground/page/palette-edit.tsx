@@ -17,7 +17,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // ローカルストレージのラッパー
-import { load, store } from '@ground/data/index';
+import { load, store } from '@palette/index';
 
 // チャットパレットを編集するページ
 function PaletteEdit() {
@@ -100,7 +100,6 @@ function PaletteEdit() {
             </Box>
           </Box>
         </Grid>
-
       </Grid>
     </Box>
   );

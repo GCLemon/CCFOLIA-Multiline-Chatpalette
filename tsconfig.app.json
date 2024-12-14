@@ -26,6 +26,7 @@
     "paths": {
       "@ground/*": ["./src/ground/*"],
       "@content/*": ["./src/content/*"],
+      "@palette/*": ["./src/palette/*"],
     }
   },
   "include": ["src"]

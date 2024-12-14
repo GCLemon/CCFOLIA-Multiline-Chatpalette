@@ -18,6 +18,7 @@ const manifest = defineManifest({
       js: ['./src/content/index.ts'],
     },
   ],
+  permissions: ['tabs', 'activeTab']
 });
 
 // ViteConfigを定義
@@ -34,6 +35,7 @@ export default defineConfig({
     alias: {
       '@ground/': `${__dirname}/src/ground/`,
       '@content/': `${__dirname}/src/content/`,
+      '@palette/': `${__dirname}/src/palette/`,
     }
   }
 });
