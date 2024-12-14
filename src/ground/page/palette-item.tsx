@@ -29,6 +29,15 @@ function PaletteItem(props:Props) {
 
   // 送信ボタンが押された時のイベント
   const send = () => {
+    chrome.tabs.query({}, tabs => {
+      const tab = tabs.find(value => value.url && value.url.includes('https://ccfolia.com/rooms'));
+      if (!tab) { return; }
+      if (tab.id) {
+        console.log(tab);
+        const port = chrome.tabs.connect(tab.id);
+        port.postMessage(props.content);
+      }
+    });
   };
 
   // 編集ボタンが押された時のイベント
