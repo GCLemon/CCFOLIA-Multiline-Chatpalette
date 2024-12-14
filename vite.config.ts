@@ -18,6 +18,7 @@ const manifest = defineManifest({
       js: ['./src/content/index.ts'],
     },
   ],
+  permissions: ['tabs', 'activeTab']
 });
 
 // ViteConfigを定義
