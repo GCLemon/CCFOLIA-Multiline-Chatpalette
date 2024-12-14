@@ -26,23 +26,25 @@ function PaletteEdit() {
   const params = useParams<{id:string}>();
   if (!params.id) { throw new Error('URL parameter is not defined: id'); }
   const palette = load(params.id);
-  console.log(palette);
 
-  // 個のコンポーネントで保持する状態
-  const [content, setContent] = useState<string>(palette.content);
-  const [sender, setSender] = useState<string>(palette.sender ?? '');
+  // 個のコンポーネントで保持する状態(読み込んだやつがnullだったら新しく作る)
+  const [content, setContent] = useState<string>(palette?.content ?? '');
+  const [sender, setSender] = useState<string>(palette?.sender ?? '');
 
   // ナビゲーション
   const navigate = useNavigate();
 
-  // 一覧に戻る処理
+  // 一覧に戻る処理(戻る前に自動保存する)
   const back = () => {
     save();
     navigate('/');
   };
 
-  // チャパレ保存処理
-  const save = () => { store({...palette,content,sender}); };
+  // チャパレ保存処理(チャパレを保存してウィンドウを閉じる操作が予想される)
+  const save = () => {
+    if (!params.id) { throw new Error('URL parameter is not defined: id'); }
+    store({id:params.id, content, sender});
+  };
 
   // レンダリングを行う
   return (

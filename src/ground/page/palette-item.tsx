@@ -2,6 +2,7 @@
 import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import Tooltip from '@mui/material/Tooltip';
 
 // アイコン関連
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -39,9 +40,21 @@ function PaletteItem(props:Props) {
   return (
     <ListItem>
       <ListItemText primary={props.content} secondary={props.sender}/>
-      <IconButton onClick={send}><SendIcon/></IconButton>
-      <IconButton onClick={edit}><EditIcon/></IconButton>
-      <IconButton onClick={_delete}><DeleteIcon/></IconButton>
+      <Tooltip title='CCFOLIA に送信'>
+        <IconButton onClick={send}>
+          <SendIcon/>
+        </IconButton>
+      </Tooltip>
+      <Tooltip title='編集'>
+        <IconButton onClick={edit}>
+          <EditIcon/>
+        </IconButton>
+      </Tooltip>
+      <Tooltip title='削除'>
+        <IconButton onClick={_delete}>
+          <DeleteIcon/>
+        </IconButton>
+      </Tooltip>
     </ListItem>
   );
 }
