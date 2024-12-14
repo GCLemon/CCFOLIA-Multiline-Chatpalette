@@ -11,13 +11,14 @@ import SendIcon from '@mui/icons-material/Send';
 
 // React Router 関連
 import { useNavigate } from 'react-router-dom';
-import { remove } from '@ground/data';
+import { remove } from '@palette/index';
+
+// ローカルストレージのラッパー
+import { Palette } from '@palette/index';
 
 // コンポーネントに渡すパラメータ
 type Props = {
-  id: string;
-  content: string,
-  sender: string,
+  palette: Palette
   reload: () => void,
 };
 
@@ -33,26 +34,25 @@ function PaletteItem(props:Props) {
       const tab = tabs.find(value => value.url && value.url.includes('https://ccfolia.com/rooms'));
       if (!tab) { return; }
       if (tab.id) {
-        console.log(tab);
         const port = chrome.tabs.connect(tab.id);
-        port.postMessage(props.content);
+        port.postMessage(props.palette);
       }
     });
   };
 
   // 編集ボタンが押された時のイベント
-  const edit = () => { navigate(`/edit/${props.id}`); };
+  const edit = () => { navigate(`/edit/${props.palette.id}`); };
 
   // 削除ボタンが押された時のイベント
   const _delete = () => {
-    remove(props.id); 
+    remove(props.palette.id); 
     props.reload();
   };
 
   // レンダリングを行う
   return (
     <ListItem>
-      <ListItemText primary={props.content} secondary={props.sender}/>
+      <ListItemText primary={props.palette.content} secondary={props.palette.sender}/>
       <Tooltip title='CCFOLIA に送信'>
         <IconButton onClick={send}>
           <SendIcon/>

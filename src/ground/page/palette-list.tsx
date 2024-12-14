@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import PaletteItem from './palette-item';
 
 // ローカルストレージのラッパー
-import { generateKey, load } from '@ground/data/index';
+import { generateKey, load } from '@palette/index';
 
 // チャットパレットのリストを表示するページ
 function PaletteList() {
@@ -41,9 +41,7 @@ function PaletteList() {
   const items = palettes.map(palette => {
     return <PaletteItem
       key={palette.id}
-      id={palette.id}
-      content={palette.content}
-      sender={palette.sender}
+      palette={palette}
       reload={reloadPalettes}/>
   });
 
