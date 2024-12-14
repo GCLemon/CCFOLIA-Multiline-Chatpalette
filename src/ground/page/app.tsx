@@ -1,5 +1,21 @@
+// React Router 関連
+import { HashRouter, Route, Routes } from 'react-router-dom';
+
+// 自作コンポーネント
+import PaletteList from './palette-list';
+import PaletteEdit from './palette-edit';
+
+// アプリケーションのルートコンポーネント
 function App() {
-  return (<h1>Hello World</h1>);
+
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path='/' element={<PaletteList/>}/>
+        <Route path='/edit/:id' element={<PaletteEdit/>}/>
+      </Routes>
+    </HashRouter>
+  );
 }
 
 export default App;

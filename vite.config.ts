@@ -17,7 +17,7 @@ const manifest = defineManifest({
       run_at: 'document_start',
       js: ['./src/content/index.ts'],
     },
-  ]
+  ],
 });
 
 // ViteConfigを定義
@@ -28,6 +28,12 @@ export default defineConfig({
       input: {
         index: './src/ground/index.html'
       }
+    }
+  },
+  resolve: {
+    alias: {
+      '@ground/': `${__dirname}/src/ground/`,
+      '@content/': `${__dirname}/src/content/`,
     }
   }
 });
