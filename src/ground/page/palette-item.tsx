@@ -10,12 +10,13 @@ import SendIcon from '@mui/icons-material/Send';
 
 // React Router 関連
 import { useNavigate } from 'react-router-dom';
+import { remove } from '@ground/data';
 
 // コンポーネントに渡すパラメータ
 type Props = {
-  key?: string,
-  title?: string,
-  text?: string,
+  id: string;
+  content: string,
+  sender: string,
 };
 
 // チャットパレットのアイテム表示部分
@@ -29,18 +30,15 @@ function PaletteItem(props:Props) {
   };
 
   // 編集ボタンが押された時のイベント
-  const edit = () => {
-    navigate('/edit');
-  };
+  const edit = () => { navigate(`/edit/${props.id}`); };
 
   // 削除ボタンが押された時のイベント
-  const _delete = () => {
-  };
+  const _delete = () => { remove(props.id); };
 
   // レンダリングを行う
   return (
-    <ListItem key={props.key}>
-      <ListItemText primary={props.title} secondary={props.text}/>
+    <ListItem>
+      <ListItemText primary={props.content} secondary={props.sender}/>
       <IconButton onClick={send}><SendIcon/></IconButton>
       <IconButton onClick={edit}><EditIcon/></IconButton>
       <IconButton onClick={_delete}><DeleteIcon/></IconButton>

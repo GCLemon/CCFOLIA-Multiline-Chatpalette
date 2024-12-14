@@ -7,11 +7,12 @@ import PaletteEdit from './palette-edit';
 
 // アプリケーションのルートコンポーネント
 function App() {
+
   return (
     <HashRouter>
       <Routes>
         <Route path='/' element={<PaletteList/>}/>
-        <Route path='/edit' element={<PaletteEdit/>}/>
+        <Route path='/edit/:id' element={<PaletteEdit/>}/>
       </Routes>
     </HashRouter>
   );

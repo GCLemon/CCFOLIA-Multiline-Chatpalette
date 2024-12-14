@@ -30,4 +30,10 @@ export default defineConfig({
       }
     }
   },
+  resolve: {
+    alias: {
+      '@ground/': `${__dirname}/src/ground/`,
+      '@content/': `${__dirname}/src/content/`,
+    }
+  }
 });
