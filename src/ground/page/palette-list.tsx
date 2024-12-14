@@ -1,3 +1,6 @@
+// React 関連
+import { useState } from 'react';
+
 // React MUI 関連
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -23,7 +26,7 @@ function PaletteList() {
   const navigate = useNavigate();
 
   // ローカルストレージを読み込み
-  const palettes = load();
+  const [palettes, setPalettes] = useState(load());
 
   // チャットパレットの新規作成
   const newPalette = () => {
@@ -31,13 +34,17 @@ function PaletteList() {
     navigate(`/edit/${key}`);
   };
 
+  // チャットパレット一覧のリロード
+  const reloadPalettes = () => { setPalettes(load()); };
+
   // 要素の作成
   const items = palettes.map(palette => {
     return <PaletteItem
       key={palette.id}
       id={palette.id}
       content={palette.content}
-      sender={palette.sender}/>
+      sender={palette.sender}
+      reload={reloadPalettes}/>
   });
 
   // レンダリングを行う

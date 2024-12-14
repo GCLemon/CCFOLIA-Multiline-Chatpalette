@@ -18,6 +18,7 @@ type Props = {
   id: string;
   content: string,
   sender: string,
+  reload: () => void,
 };
 
 // チャットパレットのアイテム表示部分
@@ -34,7 +35,10 @@ function PaletteItem(props:Props) {
   const edit = () => { navigate(`/edit/${props.id}`); };
 
   // 削除ボタンが押された時のイベント
-  const _delete = () => { remove(props.id); };
+  const _delete = () => {
+    remove(props.id); 
+    props.reload();
+  };
 
   // レンダリングを行う
   return (
