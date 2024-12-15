@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
+import { styled } from '@mui/material';
 
 // アイコン関連
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
@@ -45,6 +46,25 @@ function PaletteEdit() {
     store({id:params.id, content, sender});
   };
 
+  // テキストボックスのスタイル
+  const StyledTextField = styled(TextField)({
+    '& label.Mui-focused': {
+      color: '#FFFFFF',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#888888',
+        transition: 'border-color 0.3s ease',
+      },
+      '&:hover fieldset': {
+        borderColor: '#FFFFFF',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#FFFFFF',
+      },
+    },
+  });
+
   // レンダリングを行う
   return (
     <Box margin={2}>
@@ -54,7 +74,7 @@ function PaletteEdit() {
 
         {/* チャット内容編集ボックス */}
         <Grid size={12}>
-          <TextField
+          <StyledTextField
             label='チャット内容'
             variant='outlined'
             fullWidth
@@ -68,7 +88,7 @@ function PaletteEdit() {
         {/* 送信者名設定ボックス */}
         <Grid size={12}>
           <Tooltip title='ここにキャラコマの名前を入力すると、そのキャラクターとしてチャット内容が送信されます。'>
-            <TextField
+            <StyledTextField
               label='送信者名(任意)'
               variant='outlined'
               fullWidth
@@ -81,12 +101,12 @@ function PaletteEdit() {
         <Grid size={12}>
           <Box flexDirection='row' justifyContent='flex-end' display='flex'>
             <Box>
-              <Button variant='contained' startIcon={<NavigateBeforeIcon/>} onClick={back}>
+              <Button variant='contained' color='blue' startIcon={<NavigateBeforeIcon/>} onClick={back}>
                 一覧に戻る
               </Button>
             </Box>
             <Box ml={1}>
-              <Button variant='contained' startIcon={<SaveIcon/>} onClick={save}>
+              <Button variant='contained' color='red' startIcon={<SaveIcon/>} onClick={save}>
                 保存
               </Button>
             </Box>

@@ -33,7 +33,7 @@ function PaletteBar() {
           <Typography variant='h6' component='div' sx={{flexGrow:1}}>
             CCFOLIA Multiline Chatpalette
           </Typography>
-          <Button variant='contained' startIcon={<AddBoxIcon/>} onClick={newPalette}>
+          <Button variant='outlined' color='white' startIcon={<AddBoxIcon/>} onClick={newPalette}>
             新規作成
           </Button>
         </ToolBar>

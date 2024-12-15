@@ -59,22 +59,22 @@ function PaletteItem(props:Props) {
     <ListItem>
       <ListItemText primary={props.palette.content} secondary={senderText}/>
       <Tooltip title='CCFOLIA に送信'>
-        <IconButton onClick={send}>
+        <IconButton color='white' onClick={send}>
           <SendIcon/>
         </IconButton>
       </Tooltip>
       <Tooltip title='編集'>
-        <IconButton onClick={edit}>
+        <IconButton color='white' onClick={edit}>
           <EditIcon/>
         </IconButton>
       </Tooltip>
       <Tooltip title='削除'>
-        <IconButton onClick={_delete}>
+        <IconButton color='white' onClick={_delete}>
           <DeleteIcon/>
         </IconButton>
       </Tooltip>
     </ListItem>
-    <Divider variant='middle'/>
+    <Divider variant='middle' color='#5E5E5E'/>
     </>
   );
 }
