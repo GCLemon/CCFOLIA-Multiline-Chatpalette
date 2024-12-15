@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
 
 // アイコン関連
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
@@ -48,15 +47,8 @@ function PaletteEdit() {
 
   // レンダリングを行う
   return (
-    <Box>
+    <Box margin={2}>
 
-      {/* ラベル */}
-      <Box sx={{marginBottom:'12pt'}}>
-        <Typography variant='h6'>
-          チャットパレット編集
-        </Typography>
-      </Box>
-      
       {/* フォーム本体 */}
       <Grid container spacing={2}>
 
