@@ -11,7 +11,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 // ローカルストレージのラッパー
-import { generateKey } from '@palette/index';
+import { getIndex } from '@palette/index';
 
 // ページのヘッダを表示するコンポーネント
 function PaletteBar() {
@@ -21,7 +21,7 @@ function PaletteBar() {
 
   // チャットパレットの新規作成
   const newPalette = () => {
-    const key = generateKey();
+    const key = getIndex();
     navigate(`/edit/${key}`);
   };
 

@@ -1,49 +1,33 @@
-// パレットのIDの生成に使うやつ
-import { v4 as uuid } from 'uuid';
-
 // チャットパレットのデータ形式
 export type Palette = {
-  id: string,
+  index: number,
   content: string,
   sender: string,
 };
 
-// 一意のキーを作成する
-export function generateKey() {
-
-  // 既に使われているキーを取得する
-  const usedKeys = [...Array(localStorage.length)].map((_,i) => {
-    const id = localStorage.key(i);
-    if (!id) { throw new Error('Index is out of range'); }
-    return id;
-  });
-
-  // 被らなくなるまで UUID を生成する
-  while (true) {
-    const newKey = uuid();
-    if(!(newKey in usedKeys)) { return newKey; }
-  }
-  throw new Error('Unreachable code.'); // 絶対に来ないけど一応書いておく
+// 一意の連番キーを作成する
+export function getIndex() {
+  return localStorage.length;
 }
 
 // valueがPaletteであることを保証する関数
 export function isPalette(value:unknown): value is Palette {
   return value !== null
     && typeof value === 'object'
-    && 'id' in value && typeof value.id === 'string'
+    && 'index' in value && typeof value.index === 'number'
     && 'content' in value && typeof value.content === 'string'
     && 'sender' in value && typeof value.sender === 'string';
 }
 
 // 読み込みの内部処理
-function loadInternal(id:string) {
+function loadInternal(index:string) {
 
   // パレットデータを取ってくる(読み込みに失敗したらnullを返す)
-  const text = localStorage.getItem(id);
-  if (text === null) { return null;}
+  const text = localStorage.getItem(index);
+  if (text === null) { return null; }
 
   // テキスト形式のパレットデータを変換する(変換に失敗したらnullを返す)
-  const parsed = {...JSON.parse(text), id:id};
+  const parsed = {...JSON.parse(text), index:parseInt(index)};
   if (!isPalette(parsed)) { return null; }
   
   // 変換した結果を返す
@@ -52,21 +36,25 @@ function loadInternal(id:string) {
 
 // パレットデータをローカルストレージから読み込む関数
 export function load():Palette[];
-export function load(id:string):null|Palette;
-export function load(id?:string):null|Palette|Palette[] {
+export function load(index:number):null|Palette;
+export function load(index?:number):null|Palette|Palette[] {
 
   // 特定のIDを持つパレットデータをロードする
-  if (id) { return loadInternal(id); }
+  if (index) { return loadInternal(index.toString()); }
 
   // 全てのパレットデータをロードする
   else {
-    return [...Array(localStorage.length)].map((_,i) => {
-      const id = localStorage.key(i);
-      if (!id) { throw new Error('Index is out of range'); }
-      const data = loadInternal(id);
+
+    const palettes = [...Array(localStorage.length)].map((_,i) => {
+      const index = localStorage.key(i);
+      if (!index) { throw new Error('Index is out of range'); }
+      const data = loadInternal(index);
       if (!data) { throw new Error('Specified data should be found.'); }
       return data;
     });
+
+    palettes.sort((a, b) => a.index - b.index);
+    return palettes;
   }
 }
 
@@ -74,13 +62,22 @@ export function load(id?:string):null|Palette|Palette[] {
 export function store(palette:Palette) {
 
   // IDを指定して保存
-  const {id,...data} = palette;
-  localStorage.setItem(id, JSON.stringify(data));
+  const {index,...data} = palette;
+  localStorage.setItem(index.toString(), JSON.stringify(data));
 }
 
 // パレットデータをローカルストレージから削除する関数
-export function remove(id:string) {
+// TODO: 全削除する都合上かなり重いので修正すること
+export function remove(index:number) {
 
-  // IDを指定して削除
-  localStorage.removeItem(id);
+  // IDを指定して削除、その後番号を振り直す
+  const palettes = load()
+    .filter(x => x.index != index)
+    .map((x,i) => {return{...x,index:i}});
+
+  // 一度ストレージをクリアしておく
+  localStorage.clear();
+
+  // 読み込んだパレットを保存する
+  for (const palette of palettes) { store(palette); }
 }
