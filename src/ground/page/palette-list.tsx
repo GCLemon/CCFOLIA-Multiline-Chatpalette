@@ -22,7 +22,7 @@ function PaletteList() {
   // 要素の作成
   const items = palettes.map(palette => {
     return <PaletteItem
-      key={palette.id}
+      key={palette.index.toString()}
       palette={palette}
       reload={reloadPalettes}/>
   });

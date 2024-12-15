@@ -42,11 +42,11 @@ function PaletteItem(props:Props) {
   };
 
   // 編集ボタンが押された時のイベント
-  const edit = () => { navigate(`/edit/${props.palette.id}`); };
+  const edit = () => { navigate(`/edit/${props.palette.index}`); };
 
   // 削除ボタンが押された時のイベント
   const _delete = () => {
-    remove(props.palette.id); 
+    remove(props.palette.index); 
     props.reload();
   };
 

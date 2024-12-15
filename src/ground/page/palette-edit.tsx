@@ -19,13 +19,32 @@ import { useNavigate, useParams } from 'react-router-dom';
 // ローカルストレージのラッパー
 import { load, store } from '@palette/index';
 
+// スタイルを当てたテキストボックス
+const StyledTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#FFFFFF',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#888888',
+      transition: 'border-color 0.3s ease',
+    },
+    '&:hover fieldset': {
+      borderColor: '#FFFFFF',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#FFFFFF',
+    },
+  },
+});
+
 // チャットパレットを編集するページ
 function PaletteEdit() {
 
   // URL パラメータからローカルストレージを読み込み
   const params = useParams<{id:string}>();
   if (!params.id) { throw new Error('URL parameter is not defined: id'); }
-  const palette = load(params.id);
+  const palette = load(parseInt(params.id));
 
   // 個のコンポーネントで保持する状態(読み込んだやつがnullだったら新しく作る)
   const [content, setContent] = useState<string>(palette?.content ?? '');
@@ -43,27 +62,8 @@ function PaletteEdit() {
   // チャパレ保存処理(チャパレを保存してウィンドウを閉じる操作が予想される)
   const save = () => {
     if (!params.id) { throw new Error('URL parameter is not defined: id'); }
-    store({id:params.id, content, sender});
+    store({index:parseInt(params.id), content, sender});
   };
-
-  // テキストボックスのスタイル
-  const StyledTextField = styled(TextField)({
-    '& label.Mui-focused': {
-      color: '#FFFFFF',
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#888888',
-        transition: 'border-color 0.3s ease',
-      },
-      '&:hover fieldset': {
-        borderColor: '#FFFFFF',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#FFFFFF',
-      },
-    },
-  });
 
   // レンダリングを行う
   return (
