@@ -1,4 +1,5 @@
 // React MUI 関連
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -49,26 +50,32 @@ function PaletteItem(props:Props) {
     props.reload();
   };
 
+  // 送信者のテキスト
+  const senderText = props.palette.sender !== '' ? `送信者: ${props.palette.sender}` : '';
+
   // レンダリングを行う
   return (
+    <>
     <ListItem>
-      <ListItemText primary={props.palette.content} secondary={props.palette.sender}/>
+      <ListItemText primary={props.palette.content} secondary={senderText}/>
       <Tooltip title='CCFOLIA に送信'>
-        <IconButton onClick={send}>
+        <IconButton color='white' onClick={send}>
           <SendIcon/>
         </IconButton>
       </Tooltip>
       <Tooltip title='編集'>
-        <IconButton onClick={edit}>
+        <IconButton color='white' onClick={edit}>
           <EditIcon/>
         </IconButton>
       </Tooltip>
       <Tooltip title='削除'>
-        <IconButton onClick={_delete}>
+        <IconButton color='white' onClick={_delete}>
           <DeleteIcon/>
         </IconButton>
       </Tooltip>
     </ListItem>
+    <Divider variant='middle' color='#5E5E5E'/>
+    </>
   );
 }
 
